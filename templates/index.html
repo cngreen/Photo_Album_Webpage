@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Phorever Photos{% endblock %}
+{% block jumbo %}
+<div class="jumbotron" id="jumbo">
+    <div class="container">
+    	<div class="tbox">
+    		<h1>Phorever Photos!</h1>
+    		<p> Store all your precious photo memories with Penelope the elephant.  Elephants never forget!</p>
+    		<p><a class="btn btn-primary btn-lg" href="#users" role="button">See Our Friends!</a></p>
+    	</div>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+  <h2><a name="users"></a>Our Users</h2>
+  <ul>
+  	{% for u in usernames %}
+  		<li><a id="user_albums_{{ u.username }}" href="{{ url_for('albums.albums_route', username=u.username) }}">{{u.username}}</a></li>
+  	{% endfor %}
+  </ul>
+
+
+    <h2><a name="albums"></a>Albums</h2>
+  <ul>
+    {% for a in albums %}
+      <li><a id="album_{{ a.albumid }}_link" href="{{ url_for('album.album_route', albumid = a.albumid) }}">{{a.title}}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

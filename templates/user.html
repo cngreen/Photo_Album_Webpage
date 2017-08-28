@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+        <script src="/static/js/user.js"></script> 
+        <div id="errorzone"></div>
+	<form id="new_user_form" class="form-horizontal" style="padding-top:24px">
+		 <div class="form-group">
+                <label class="control-label col-sm-2" for="new_username_input">Username:</label>
+                <div class="col-sm-8">
+		    <input type="text" class="form-control" id="new_username_input" name="username" placeholder="Enter Username">
+                </div>
+            </div>
+
+		 <div class="form-group">
+                <label class="control-label col-sm-2" for="new_firstname_input">First Name:</label>
+                <div class="col-sm-8">
+		    <input type="text" class="form-control" id="new_firstname_input" name="firstname" placeholder="Enter First Name">
+                </div>
+            </div>  
+
+		 <div class="form-group">
+                <label class="control-label col-sm-2" for="new_lastname_input">Last Name:</label>
+                <div class="col-sm-8">
+		    <input type="text" class="form-control" id="new_lastname_input" name="lastname" placeholder="Enter Last Name">
+                </div>
+            </div>  
+
+	    <div class="form-group">
+                <label class="control-label col-sm-2" for="new_password1_input">Password1:</label>
+                <div class="col-sm-8">
+		    <input type="password" class="form-control" id="new_password1_input" name="password1" placeholder="Enter Password1" placeholder="password1">
+                </div>
+            </div>
+
+	    <div class="form-group">
+                <label class="control-label col-sm-2" for="new_password2_input">Password2:</label>
+                <div class="col-sm-8">
+		    <input type="password" class="form-control" id="new_password2_input" name="password2" placeholder="Enter Password2" placeholder="password2">
+                </div>
+            </div>
+
+		 <div class="form-group">
+                <label class="control-label col-sm-2" for="new_email_input">Email Address:</label>
+                <div class="col-sm-8">
+		    <input type="text" class="form-control" id="new_email_input" name="email" placeholder="Enter Email">
+                </div>
+            </div>             
+
+            <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button type="submit" id="new_submit" class="btn btn-default">Create User</button>
+                </div>
+            </div>
+	</form>
+
+{% endblock %}

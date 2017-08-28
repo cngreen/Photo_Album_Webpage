@@ -1,0 +1,7 @@
+venv/
+*.swp
+static/images
+*.pyc
+config.py
+controllers/*.pyc
+.DS_Store

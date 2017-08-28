@@ -1,0 +1,99 @@
+
+{% extends "base.html" %}
+{% block content %}
+    <h1> {% for a in albumname %} {{a.title}} {% endfor %} </h1>
+
+    {% for p in pics %}
+      {% if not edit %}
+      <a id= "pic_{{ p.picid }}_link" href= "{{ url_for('pic.pic_route', picid=p.picid) }}">
+      <div class="imageCaption">
+      <img src="/static/images/{{p.picid}}.{{p.format}}" height= "150" width= "150"></a>
+      <p> {{p.caption}} {{p.date}} </p>
+      </div>
+      {% else %}
+      <div class="img-wrap">
+      <form action="{{url_for('album.album_edit_route')}}" method="POST">
+        <input type="hidden" name="op" value="delete" />
+        <input type="hidden" name="albumid" value="{{albumid}}" />
+        <input type="hidden" name="picid" value="{{p.picid}}" />
+      <button type="submit" id="delete_pic_{{p.picid}}" class="btn btn-default close"><span class="glyphicon glyphicon-remove"></span></button>
+      </form>
+      <a id= "pic_{{ p.picid }}_link" href= "{{ url_for('pic.pic_route', picid=p.picid) }}">
+      <img src="/static/images/{{p.picid}}.{{p.format}}" height= "150" width= "150"></a>
+      </div>
+      {% endif %}
+    {% endfor %}
+
+    <p> </p>
+
+    {% if not edit %}{% if ismyalbum %}
+    <p></p>
+      <a id= "edit_album" href="{{ url_for('album.album_edit_route', albumid=albumid) }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit Album</a>
+    {% endif %}{% endif %}
+
+    {% if edit %}
+    <h3> Add photos </h3>
+      <form class="form-inline" action="{{ url_for('album.album_edit_route') }}" method="POST" enctype="multipart/form-data">
+         <div class="form-group">
+           <input type="file" name="file" id="file_input" />
+           <input type="hidden" name="op" value="add" />
+           <input type="hidden" name="albumid" value="{{albumid}}" />
+           <button type="submit" class="btn btn-primary" id="file_submit" role="button"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+         </div>
+      </form>
+     {% endif %}
+
+      {% if edit %}
+
+      <h3> Edit album privacy </h3>
+      <form action="{{ url_for('album.album_edit_route') }}" method="POST">
+        <input type="hidden" name="albumid" value="{{albumid}}" />
+        <input type="hidden" name="op" value="access" />
+      <div class="radio">
+      <label><input type="radio" name="access" id="album_edit_public_radio" value="public" />Public</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="access" id="album_edit_private_radio" value="private" />Private</label>
+    </div>
+      <button type="submit" class="btn btn-primary" id="album_edit_access_submit">Submit</button>
+    </form>
+
+
+      {% if private %}
+      <h3> Edit user privileges </h3>
+
+      {% for u in users %}
+      <div class="row albumrow">
+        <div class="col-xs-10 col-md-11 albumli">
+          {{u.username}}
+        </div>
+        <div class="col-xs-2 col-md-1 albumbtn">
+          <form action="{{ url_for('album.album_edit_route', albumid=albumid) }}" method="POST">
+          <input type="hidden" name="op" value="revoke" />
+          <input type="hidden" name="albumid" value="{{albumid}}" />
+          <input type="hidden" name="username" value="{{u.username}}" />
+          <button type="submit" class="btn btn-danger btn-block" id="album_edit_revoke_{{u.username}}" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="row albumrow">
+        <form class="form-inline" action="{{ url_for('album.album_edit_route', albumid=albumid) }}" method="POST">
+          <input type="hidden" name="op" value="grant" />
+          <input type="hidden" name="albumid" value="{{albumid}}" />
+          <div class="col-xs-10 col-md-11">
+            <div class="form-group wide">
+              <input type="text" class="form-control" style="width:90%;" id="album_edit_grant_input" name="username" placeholder="Grant new user privileges" />
+            </div>
+          </div>
+          <div class="col-xs-2 col-md-1 albumbtn">
+            <button type="submit" class="btn btn-success btn-block" id="album_edit_grant_submit" role="button"><span class="glyphicon glyphicon-plus"></span></button>
+          </div>
+        </form>
+      </div>
+{% endif %}
+      <a id= "return_to_album" href="{{ url_for('album.album_route', albumid=albumid) }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-retweet"></span> Return to Album</a>
+
+
+    {% endif %}
+{% endblock %}

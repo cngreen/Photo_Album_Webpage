@@ -1,0 +1,30 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{url_for('main.main_route')}}">Phorever Photos</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            {% if 'username' in session %}
+            <li{% if nav_home %} class="active"{%endif%}><a href="{{url_for('main.main_route')}}" id="nav_home">Home</a></li>
+            <li{% if nav_edit %} class="active"{%endif%}><a href="{{url_for('user.user_edit_route')}}" id="nav_edit">Edit Account</a></li>
+            <li><a href="{{url_for('albums.albums_route')}}" id="nav_albums">My Albums</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if 'username' in session %}
+            <li style="color:white;">Logged in as {{get_fullname(session.username)}}</li>
+            <li><a href="#" id="nav_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {% else %}
+            <li><a id="home_user_create" href="{{url_for('user.user_route')}}"><span class="glyphicon glyphicon-user"></span> Join the Herd</a></li>
+            <li{% if nav_login %} class="active"{%endif%}><a href="{{url_for('login.login_route')}}" id="home_login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>

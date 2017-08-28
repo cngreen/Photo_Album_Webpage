@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <script src="/static/js/pic.js"></script> 
+    {% for i in info %}
+   	<img src="/static/images/{{i.picid}}.{{i.format}}">
+   	<p id="pic_{{i.picid}}_caption"> {{i.caption}} </p>
+      {% if ismypic %}
+      <form action="{{ url_for('pic.pic_route', picid=i.picid) }}" method="POST">
+          <input type="hidden" name="op" value="caption" />
+          <input type="hidden" name="picid" value="{{i.picid}}" />
+          <input type="text" id="pic_caption_input" name="caption" placeholder="newcaption" />
+          <button type="submit" id="pic_caption_submit" class="btn btn-sm" role="button"><span class="glyphicon glyphicon-pencil"></span></button>
+      </form>
+      {% endif %}
+   	{% endfor %}
+
+
+   	{% if hasprevious %}
+   		{% for p in previous %}
+   		<a id="prev_pic" href="{{ url_for('pic.pic_route', picid=p.picid) }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Previous Photo</a>
+   		{% endfor %}
+   	{% endif %}
+
+   	{% if hasnext %}
+   		{% for n in next %}
+   		<a id="next_pic" href="{{ url_for('pic.pic_route', picid=n.picid) }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Next Photo</a>
+   		{% endfor %}
+   	{% endif %}
+
+
+   	{% for i in info %}
+   	<a id="parent_album" href="{{ url_for('album.album_route', albumid=i.albumid) }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-retweet"></span> Return to Album</a>
+   	{% endfor %}
+{% endblock %}

@@ -1,0 +1,72 @@
+#jumbo{
+	background-image: url('bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100vh;
+	color: white;
+}
+
+.error {
+    color:red;
+}
+#jumbo404 {
+	background-image: url('404.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100vh;
+	color: white;
+	margin-bottom:0px;
+}
+
+.albumbtn {
+	padding-left:0px;
+}
+
+.albumrow {
+	margin-bottom:5px;
+}
+
+.wide {
+	width:100%;
+}
+
+.albumli {
+	font-size:16px;
+	padding-top:8px;
+	padding-bottom:4px;
+}
+.tbox{
+	background-color: rgba(0,0,0,0.5);
+	padding: 10px;
+	padding-left: 15px;
+	border-radius: 10px;
+}
+
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    border: 1px red solid;
+    font-size: 0;
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background-color: rbga(255, 255, 255, 100);
+    padding: 5px;
+    opacity: .2;
+		color:red;
+}
+.img-wrap:hover .close {
+    opacity: 1;
+}
+
+body {
+	padding-top: 50px;
+}
+
+.imageCaption{
+	display: inline-block;
+	width: 150px;
+}
